@@ -1,36 +1,52 @@
 # Swap — AI-Powered Second-Hand Goods Exchange Platform
 
-A mobile platform that combines AI object recognition with a 
-card-based exchange interface, making secondhand trading faster, 
-safer, and more engaging for university students.
+A Flutter mobile app with a Python backend that automates secondhand 
+item listings using computer vision — users upload one photo and the 
+platform fills in name, category, color, and brand automatically.
 
-National Chengchi University · MIS Department · 2023 Project Presentation · Team 8A
+National Chengchi University · MIS Department · 2023 · Team 8A
 
-## Overview
+## Problem
 
-Swap simplifies the secondhand listing process using AI — users 
-upload a photo and the platform automatically fills in item name, 
-category, color, and brand, eliminating manual input entirely.
+Existing secondhand platforms require manual input for every listing, 
+have poor UX, and lack trust mechanisms — discouraging casual users 
+from participating.
 
-## Features
+## Solution
 
-- **Auto-tagging** — YOLO object detection identifies item category 
-  and name from photos
-- **Color recognition** — K-Means clustering detects item color 
-  automatically
-- **Brand detection** — AILOGO recognition identifies brand from images
-- **Student account verification** — reduces fake accounts and fraud
-- **English interface** — designed to be accessible to international students
-- **Card-based UI** — swipe-style design built for Gen Z users
+Swap reduces listing friction to a single photo upload by chaining 
+three AI models in sequence:
+
+1. **YOLO v5 object detection** — localizes and classifies the item, 
+   extracting category and product name
+2. **K-Means color clustering** — samples dominant pixel clusters 
+   from the detected region to identify item color
+3. **AILOGO recognition** — matches brand logos against a trained 
+   classifier to fill in brand name
+
+All three outputs auto-populate the listing form before the user 
+sees it.
 
 ## Tech Stack
 
 | Layer | Technology |
 |---|---|
-| Frontend | Flutter |
-| Backend | Python |
-| Image Recognition | YOLO, K-Means, AILOGO |
-| Database | Supports unstructured data |
+| Mobile Frontend | Flutter (Dart) |
+| Backend API | Python |
+| Object Detection | YOLOv3 |
+| Color Extraction | K-Means clustering (OpenCV) |
+| Brand Recognition | AILOGO classifier |
+| Auth | University student account verification |
+| Database | NoSQL (unstructured data support) |
+
+## Key Design Decisions
+
+- **Student-only auth** — verified school accounts reduce fake 
+  listings and fraud without complex KYC
+- **English-first UI** — targets international students on campus 
+  who are underserved by Chinese-language platforms
+- **Card swipe interface** — reduces cognitive load vs. 
+  traditional list-based secondhand apps
 
 ## Team & Responsibilities
 
